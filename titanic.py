@@ -57,7 +57,7 @@ if __name__ == "__main__":
     assembler = VectorAssembler(inputCols=required_features, outputCol='features')
     transformed_data = assembler.transform(dataset)
 
-    model = RandomForestClassificationModel.load('/hadoop/titanic2')
+    model = RandomForestClassificationModel.load('/hadoop/titanic')
 
     predictions = model.transform(transformed_data)
     get_propensity = udf(lambda x: x[1], ArrayType(FloatType()))
