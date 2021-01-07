@@ -13,16 +13,12 @@ from pyspark.ml.feature import StringIndexer
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.classification import RandomForestClassificationModel
 
-if __name__ == "__main__":
-    spark = SparkSession\
-        .builder\
-        .appName("Titanic")\
-        .getOrCreate()
-
+#modelop.score
+def score(input_file_loc, output_file_loc):
     df = (spark.read
           .format("csv")
           .option('header', 'true')
-          .load("/hadoop/test.csv"))
+          .load(input_file_loc)
 
     dataset = df.select(col('Pclass').cast('float'),
                         col('Sex'),
@@ -71,5 +67,14 @@ if __name__ == "__main__":
                         )
 
     print(predictions.head(5))
-    predictions.write.csv('/hadoop/titanic_output.csv')
+    predictions.write.csv(output_file_loc)
+    return 
+
+if __name__ == "__main__":
+    spark = SparkSession\
+        .builder\
+        .appName("Titanic")\
+        .getOrCreate()
+
+    score('/hadoop/test.csv', '/hadoop/titanic_output.csv')
     spark.stop()
