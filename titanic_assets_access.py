@@ -15,8 +15,14 @@ from pyspark.ml.classification import RandomForestClassificationModel
 
 # modelop.score
 def score(input_files, output_files):
-    print("input_files contents: " + input_files)
-    print("output_files contents: " + output_files)
+
+    spark = SparkSession\
+            .builder\
+            .appName("Titanic")\
+            .getOrCreate()
+
+    print("input_files contents: " + str(input_files))
+    print("output_files contents: " + str(output_files))
 
     print("input fileUrl: " + input_files['test.csv']['fileUrl'])
     print("input fileUrl 2: " + input_files['titanic']['fileUrl'])
@@ -76,12 +82,3 @@ def score(input_files, output_files):
     print(predictions.head(5))
     predictions.write.csv(output_files['titanic_output.csv']['fileUrl'])
     return
-
-if __name__ == "__main__":
-    spark = SparkSession\
-        .builder\
-        .appName("Titanic")\
-        .getOrCreate()
-
-    score(input_files['test.csv']['fileUrl'], output_files['titanic_output.csv']['fileUrl'])
-    spark.stop()
