@@ -20,3 +20,5 @@ job_output = {
        "fileFormat": "CSV"
         }
     }
+
+method_to_be_executed = "score"
