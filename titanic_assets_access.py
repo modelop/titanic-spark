@@ -14,7 +14,7 @@ from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.classification import RandomForestClassificationModel
 
 # modelop.score
-def score(input_files, output_files):
+def score(input_files, output_files, model_attachment_files):
 
     spark = SparkSession\
             .builder\
@@ -25,7 +25,7 @@ def score(input_files, output_files):
     print("output_files contents: " + str(output_files))
 
     print("input fileUrl: " + input_files['test.csv']['fileUrl'])
-    print("input fileUrl 2: " + input_files['titanic']['fileUrl'])
+    print("input fileUrl 2: " + model_attachment_files['titanic']['fileUrl'])
     print("output fileUrl: " + output_files['titanic_output.csv']['fileUrl'])
 
     df = (spark.read
@@ -66,7 +66,7 @@ def score(input_files, output_files):
     assembler = VectorAssembler(inputCols=required_features, outputCol='features')
     transformed_data = assembler.transform(dataset)
 
-    model = RandomForestClassificationModel.load(input_files['titanic']['fileUrl'])
+    model = RandomForestClassificationModel.load(model_attachment_files['titanic']['fileUrl'])
 
     predictions = model.transform(transformed_data)
     get_propensity = udf(lambda x: x[1], ArrayType(FloatType()))
