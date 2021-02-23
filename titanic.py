@@ -18,7 +18,7 @@ def score(input_file_loc, output_file_loc):
     df = (spark.read
           .format("csv")
           .option('header', 'true')
-          .load(input_file_loc)
+          .load(input_file_loc))
 
     dataset = df.select(col('Pclass').cast('float'),
                         col('Sex'),
