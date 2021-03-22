@@ -22,7 +22,7 @@ It is recommended to use the image `modelop/spark-cluster:dev-bp-ds` for the Spa
   - Input asset: `hdfs:///hadoop/demo/titanic-spark/test.csv`
   - Output asset: `hdfs:///hadoop/demo/titanic-spark/titanic_output.csv`
 4. Wait for the job to enter the `COMPLETE` state
-5. Inside the Spark cluter, use `hadoop fs -getmerge -nl /hadoop/demo/titanic-spark/titanic_output.csv /home/cloudera/titanic_output.csv` and `kubectl cp SPARK_CLUSTER_POD_NAME:/home/cloudera/titanic_output.csv titanic_output.csv` to copy the output asset to your local computer.
+5. Inside the Spark cluster, use `hadoop fs -getmerge -nl /hadoop/demo/titanic-spark/titanic_output.csv /home/cloudera/titanic_output.csv` and `kubectl cp SPARK_CLUSTER_POD_NAME:/home/cloudera/titanic_output.csv titanic_output.csv` to copy the output asset to your local computer.
   - After running `hadoop fs -getmerge ...`, you can run `cat titanic_output.csv` in the Spark cluster and you should see the following printed to the terminal:
 
 ```

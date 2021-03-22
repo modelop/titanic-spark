@@ -66,12 +66,12 @@ def score(external_inputs, external_outputs, external_model_assets):
 
     predictions = MODEL.transform(transformed_data)
     get_propensity = udf(lambda x: x[1], ArrayType(FloatType()))
-    print(predictions.head(5))
+    predictions.head(5).show()
     predictions = predictions.select(
         "Pclass", "Age", "Gender", "Fare", "Boarded", "prediction"
     )
 
-    print(predictions.head(5))
+    predictions.head(5).show()
     # Use coalesce() so that the output CSV is a single file for easy reading
     predictions.coalesce(1).write.mode("overwrite").option("header", "true").csv(
         output_asset_path
