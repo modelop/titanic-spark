@@ -12,6 +12,7 @@ from pyspark.sql.types import ArrayType, FloatType
 from pyspark.ml.feature import StringIndexer
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.classification import RandomForestClassificationModel
+from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 
 
 # modelop.init
@@ -32,9 +33,53 @@ def score(external_inputs, external_outputs, external_model_assets):
         external_inputs, external_outputs
     )
 
-    df = SPARK.read.format("csv").option("header", "true").load(input_asset_path)
+    input_df = SPARK.read.format("csv").option("header", "true").load(input_asset_path)
+    predictions = predict(input_df)
 
-    dataset = df.select(
+    predictions.limit(5).show()
+    predictions = predictions.select(
+        "Pclass", "Age", "Gender", "Fare", "Boarded", "prediction"
+    )
+
+    predictions.limit(5).show()
+    # Use coalesce() so that the output CSV is a single file for easy reading
+    predictions.coalesce(1).write.mode("overwrite").option("header", "true").csv(
+        output_asset_path
+    )
+
+    SPARK.stop()
+
+
+# modelop.metrics
+def metrics(external_inputs, external_outputs, external_model_assets):
+    # Grab single input asset and single output asset file paths
+    input_asset_path, output_asset_path = parse_assets(
+        external_inputs, external_outputs
+    )
+
+    input_df = SPARK.read.format("csv").option("header", "true").load(input_asset_path)
+    predictions = predict(input_df)
+
+    # Select (prediction, true label) and compute test error
+    evaluator = MulticlassClassificationEvaluator(
+        labelCol="Survived", predictionCol="prediction", metricName="accuracy"
+    )
+    accuracy = evaluator.evaluate(predictions)
+
+    output_df = SPARK.createDataFrame([{"accuracy": accuracy}])
+    print("Metrics output:")
+    output_df.show()
+
+    output_df.coalesce(1).write.mode("overwrite").option("header", "true").csv(
+        output_asset_path
+    )
+
+    SPARK.stop()
+
+
+def predict(input_df):
+    dataset = input_df.select(
+        col("Survived").cast("float"),
         col("Pclass").cast("float"),
         col("Sex"),
         col("Age").cast("float"),
@@ -65,19 +110,7 @@ def score(external_inputs, external_outputs, external_model_assets):
     transformed_data = assembler.transform(dataset)
 
     predictions = MODEL.transform(transformed_data)
-    get_propensity = udf(lambda x: x[1], ArrayType(FloatType()))
-    predictions.limit(5).show()
-    predictions = predictions.select(
-        "Pclass", "Age", "Gender", "Fare", "Boarded", "prediction"
-    )
-
-    predictions.limit(5).show()
-    # Use coalesce() so that the output CSV is a single file for easy reading
-    predictions.coalesce(1).write.mode("overwrite").option("header", "true").csv(
-        output_asset_path
-    )
-
-    SPARK.stop()
+    return predictions
 
 
 def parse_assets(external_inputs, external_outputs):
