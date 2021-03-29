@@ -1,0 +1,159 @@
+{
+    "group": "modelop",
+    "jobType": "MODEL_BATCH_TEST_JOB",
+    "lastModifiedBy": "SYSTEM",
+    "jobStatus": "CREATED",
+    "inputData": [
+      {
+        "name": "myinpufile",
+        "assetType": "EXTERNAL_FILE",
+        "assetRole": "UNKNOWN",
+        "repositoryInfo": {
+          "repositoryType": "HDFS_REPOSITORY",
+          "host": "",
+          "port": 0
+        },
+        "fileUrl": "hdfs:///hadoop/demo/titanic-spark/test.csv",
+        "filename": "test.csv",
+        "fileFormat": "CSV",
+        "fileSize": 0
+      }
+    ],
+    "outputData": [
+      {
+        "name": "",
+        "assetType": "EXTERNAL_FILE",
+        "assetRole": "UNKNOWN",
+        "repositoryInfo": {
+          "repositoryType": "HDFS_REPOSITORY",
+          "host": "myoutputfile",
+          "port": 0
+        },
+        "fileUrl": "hdfs:///hadoop/demo/titanic-spark/titanic_metrics_output.csv",
+        "filename": "titanic_metrics_output.csv",
+        "fileFormat": "CSV",
+        "fileSize": 0
+      }
+    ],
+    "model": {
+      "id": "88780782-3dd9-4f56-803d-5a50ddd117b1",
+      "group": "modelop",
+      "version": 30,
+      "createdDate": "2021-03-26T14:12:20.345Z",
+      "lastModifiedDate": "2021-03-26T14:12:21.424Z",
+      "createdBy": "John Doe",
+      "lastModifiedBy": "SYSTEM",
+      "storedModel": {
+        "id": "5c7cdfa6-5fa9-4b19-8946-26fe278be7a3",
+        "group": "modelop",
+        "version": 1,
+        "createdDate": "2021-03-26T13:13:48.133Z",
+        "lastModifiedDate": "2021-03-26T13:13:48.352Z",
+        "createdBy": "John Doe",
+        "lastModifiedBy": "John Doe",
+        "modelMetaData": {
+          "custom": {},
+          "tags": [],
+          "name": "titanic-spark",
+          "description": "for QA",
+          "type": "PYSPARK",
+          "classicModel": false,
+          "inputSchema": [],
+          "outputSchema": [],
+          "enableInputSchemaChecking": false,
+          "enableOutputSchemaChecking": false,
+          "attachments": [],
+          "repositoryInfo": {
+            "classicRepository": false,
+            "repositoryType": "GIT_REPO",
+            "repositoryDirectory": "/tmp/model-manage-repos/master/5c7cdfa6-5fa9-4b19-8946-26fe278be7a3",
+            "repositoryRemote": "https://github.com/modelop/titanic-spark",
+            "repositoryBranch": "master",
+            "lastCommitId": "d9d82e76215cb9a33410f6091678a8f42c9b01ca"
+          }
+        },
+        "modelAssets": [
+          {
+            "assetId": "a8a9521c-f740-34f4-9890-1910722ba1b9",
+            "name": "titanic.py",
+            "assetType": "SOURCE_CODE",
+            "assetRole": "MODEL_SOURCE",
+            "repositoryInfo": {
+              "classicRepository": false,
+              "repositoryType": "GIT_REPO",
+              "repositoryDirectory": "/tmp/model-manage-repos/master/5c7cdfa6-5fa9-4b19-8946-26fe278be7a3",
+              "repositoryRemote": "https://github.com/modelop/titanic-spark",
+              "repositoryBranch": "master",
+              "lastCommitId": "d9d82e76215cb9a33410f6091678a8f42c9b01ca"
+            },
+            "importedRepository": {
+              "classicRepository": false,
+              "repositoryType": "GIT_REPO",
+              "repositoryDirectory": "/tmp/model-manage-repos/master/5c7cdfa6-5fa9-4b19-8946-26fe278be7a3",
+              "repositoryRemote": "https://github.com/modelop/titanic-spark",
+              "repositoryBranch": "master",
+              "lastCommitId": "d9d82e76215cb9a33410f6091678a8f42c9b01ca"
+            },
+            "primaryModelSource": true,
+            "sourceCode": "CHANGEME",
+            "sourceCodeFilePath": "titanic.py",
+            "sourceCodeType": "MODEL",
+            "initFunction": "init",
+            "scoreFunction": "score",
+            "metricsFunction": "metrics"
+          }
+        ],
+        "gitDifferences": [],
+        "associatedModels": []
+      },
+      "metaData": {
+        "custom": {},
+        "tags": [],
+        "name": "titanic-spark-20210326_0911"
+      },
+      "associatedModels": [],
+      "modelDocuments": [],
+      "targetRuntimes": [
+        {
+          "engineType": "SPARK_RUNTIME",
+          "inputEndpoints": [],
+          "outputEndpoints": [],
+          "tags": []
+        },
+        {
+          "id": "ac805d81-7473-36a1-b9c8-6ee8312318d6",
+          "engineType": "SPARK_RUNTIME",
+          "inputEndpoints": [],
+          "outputEndpoints": [],
+          "tags": []
+        }
+      ]
+    },
+    "targetEngine": {
+      "id": "ac805d81-7473-36a1-b9c8-6ee8312318d6",
+      "group": "modelop",
+      "version": 2,
+      "createdDate": "2021-03-24T18:41:06.138Z",
+      "lastModifiedDate": "2021-03-26T15:21:54.590Z",
+      "createdBy": "SYSTEM",
+      "lastModifiedBy": "John Doe",
+      "engineType": "SPARK_RUNTIME",
+      "name": "spark-runtime-1",
+      "state": "INIT",
+      "inputEndpoints": [],
+      "outputEndpoints": [],
+      "tags": [
+        "test",
+        "titanic-spark"
+      ]
+    },
+    "modelWritesOutput": false,
+    "_links": {
+      "self": {
+        "href": "http://mocaasin.modelop.center/api/modelBatchTestJob/56bf3614-9244-45e7-a9aa-9156216170bd"
+      },
+      "modelBatchTestJob": {
+        "href": "http://mocaasin.modelop.center/api/modelBatchTestJob/56bf3614-9244-45e7-a9aa-9156216170bd"
+      }
+    }
+  }

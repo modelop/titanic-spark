@@ -51,6 +51,22 @@ accuracy
 0.7972027972027972
 ```
 
+### Manual Tests
+
+The `job_submit` folder includes files that can send a job to MOC directly. you can update the global environment variables in `job_submit/submit.py` to point to your instance and run different types of jobs:
+
+```python
+BASE_URL = "http://my.modelop.center.instance"
+MODEL_FILENAME = "titanic.py"
+JOB_FILENAME = "job_submit/titanic_metrics_job.json"
+```
+
+Then run `submit.py` to submit the job:
+
+```
+python3 job_submit/submit.py
+```
+
 ## Local Tests
 
 To run this example locally:

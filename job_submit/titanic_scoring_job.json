@@ -1,0 +1,62 @@
+{
+    "jobType": "MODEL_BATCH_JOB",
+    "jobStatus": "CREATED",
+    "model": {
+        "storedModel": {
+            "modelAssets": [
+                {
+                    "name": "titanic-spark.py",
+                    "assetType": "SOURCE_CODE",
+                    "primaryModelSource": true,
+                    "initFunction": "init",
+                    "scoreFunction": "score",
+                    "sourceCode": "CHANGEME"
+                }
+            ],
+            "modelMetaData": {
+                "type": "UNKNOWN"
+            }
+        }
+    },
+    "jobParameters": {
+        "--executor-memory": "512MB",
+        "--total-executor-cores": "10",
+        "-v": ""
+    },
+    "inputData": [
+        {
+            "assetType": "EXTERNAL_FILE",
+            "assetRole": "COMPARATOR_DATA",
+            "fileUrl": "hdfs:///hadoop/demo/titanic-spark/test.csv",
+            "filename": "test.csv",
+            "fileFormat": "CSV",
+            "repositoryInfo": {
+                "repositoryType": "HDFS_REPOSITORY",
+                "host": "",
+                "port": 0
+            }
+        }
+    ],
+    "outputData": [
+        {
+            "assetType": "EXTERNAL_FILE",
+            "assetRole": "UNKNOWN",
+            "fileUrl": "hdfs:///hadoop/demo/titanic-spark/titanic_output.csv",
+            "filename": "titanic_output.csv",
+            "fileFormat": "CSV",
+            "repositoryInfo": {
+                "repositoryType": "HDFS_REPOSITORY",
+                "host": "",
+                "port": 0
+            }
+        }
+    ],
+    "targetEngine": {
+        "engineType": "SPARK_RUNTIME",
+        "name": "spark-runtime-1",
+        "executorMemory": "512MB",
+        "sparkConf": {
+            "--master": "yarn"
+        }
+    }
+}
