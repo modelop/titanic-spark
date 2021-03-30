@@ -27,16 +27,16 @@ It is recommended to use the image `modelop/spark-cluster:dev-bp-ds` for the Spa
 3. Inside the Spark cluster, use `hadoop fs -getmerge -nl /hadoop/demo/titanic-spark/titanic_output.csv /home/cloudera/titanic_output.csv` and `kubectl cp SPARK_CLUSTER_POD_NAME:/home/cloudera/titanic_output.csv titanic_output.csv` to copy the output asset to your local computer.
     - After running `hadoop fs -getmerge ...`, you can run `cat titanic_output.csv` in the Spark cluster and you should see the following printed to the terminal:
 
-```
-Pclass,Age,Gender,Fare,Boarded,prediction
-3.0,26.0,0.0,7.8958,0.0,0.0
-1.0,25.0,1.0,151.55,0.0,1.0
-3.0,40.0,0.0,7.225,1.0,0.0
-3.0,1.0,1.0,11.1333,0.0,1.0
-3.0,11.0,0.0,46.9,0.0,0.0
-2.0,36.0,1.0,26.0,0.0,1.0
-...
-```
+   ```
+   Pclass,Age,Gender,Fare,Boarded,prediction
+   3.0,26.0,0.0,7.8958,0.0,0.0
+   1.0,25.0,1.0,151.55,0.0,1.0
+   3.0,40.0,0.0,7.225,1.0,0.0
+   3.0,1.0,1.0,11.1333,0.0,1.0
+   3.0,11.0,0.0,46.9,0.0,0.0
+   2.0,36.0,1.0,26.0,0.0,1.0
+   ...
+   ```
 
 ### Test Metrics Jobs
 1. Create a new scoring job with the following HDFS URL assets (do not select the "Secured" option):
@@ -46,10 +46,10 @@ Pclass,Age,Gender,Fare,Boarded,prediction
 3. Inside the Spark cluster, use `hadoop fs -getmerge -nl /hadoop/demo/titanic-spark/titanic_metrics_output.csv /home/cloudera/titanic_metrics_output.csv` and `kubectl cp SPARK_CLUSTER_POD_NAME:/home/cloudera/titanic_metrics_output.csv titanic_metrics_output.csv` to copy the output asset to your local computer.
     - After running `hadoop fs -getmerge ...`, you can run `cat titanic_metrics_output.csv` in the Spark cluster and you should see the following printed to the terminal:
 
-```
-accuracy
-0.7972027972027972
-```
+   ```
+   accuracy
+   0.7972027972027972
+   ```
 
 ### Manual Tests
 
