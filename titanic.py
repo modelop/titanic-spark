@@ -71,9 +71,9 @@ def metrics(external_inputs: List, external_outputs: List, external_model_assets
     print("Metrics output:")
     output_df.show()
 
-    output_df.coalesce(1).write.mode("overwrite").option("header", "true").csv(
-        output_asset_path
-    )
+    output_df.coalesce(1).write.mode("overwrite").option("header", "true").format(
+        "json"
+    ).save(output_asset_path)
 
     SPARK.stop()
 

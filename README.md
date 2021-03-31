@@ -41,14 +41,13 @@ It is recommended to use the image `modelop/spark-cluster:dev-bp-ds` for the Spa
 ### Test Metrics Jobs
 1. Create a new scoring job with the following HDFS URL assets (do not select the "Secured" option):
     - Input asset: `hdfs:///hadoop/demo/titanic-spark/test.csv`
-    - Output asset: `hdfs:///hadoop/demo/titanic-spark/titanic_metrics_output.csv`
+    - Output asset: `hdfs:///hadoop/demo/titanic-spark/titanic_metrics_output.json`
 2. Wait for the job to enter the `COMPLETE` state
-3. Inside the Spark cluster, use `hadoop fs -getmerge -nl /hadoop/demo/titanic-spark/titanic_metrics_output.csv /home/cloudera/titanic_metrics_output.csv` and `kubectl cp SPARK_CLUSTER_POD_NAME:/home/cloudera/titanic_metrics_output.csv titanic_metrics_output.csv` to copy the output asset to your local computer.
-    - After running `hadoop fs -getmerge ...`, you can run `cat titanic_metrics_output.csv` in the Spark cluster and you should see the following printed to the terminal:
+3. Inside the Spark cluster, use `hadoop fs -getmerge -nl /hadoop/demo/titanic-spark/titanic_metrics_output.json /home/cloudera/titanic_metrics_output.csv` and `kubectl cp SPARK_CLUSTER_POD_NAME:/home/cloudera/titanic_metrics_output.json titanic_metrics_output.json` to copy the output asset to your local computer.
+    - After running `hadoop fs -getmerge ...`, you can run `cat titanic_metrics_output.json` in the Spark cluster and you should see the following printed to the terminal:
 
-   ```
-   accuracy
-   0.7972027972027972
+   ```json
+   {"accuracy": 0.7972027972027972}
    ```
 
 ### Manual Tests
