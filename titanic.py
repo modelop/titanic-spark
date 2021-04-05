@@ -131,8 +131,6 @@ def parse_assets(external_inputs: List, external_outputs: List):
     # Fail if assets are JSON
     if ("fileFormat" in input_asset) and (input_asset["fileFormat"] == "JSON"):
         raise ValueError("Input file format is set as JSON but must be CSV")
-    if ("fileFormat" in output_asset) and (output_asset["fileFormat"] == "JSON"):
-        raise ValueError("Output file format is set as JSON but must be CSV")
 
     # Return paths from file URLs
     input_asset_path = input_asset["fileUrl"]
