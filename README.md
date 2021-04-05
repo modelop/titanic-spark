@@ -43,11 +43,11 @@ It is recommended to use the image `modelop/spark-cluster:dev-bp-ds` for the Spa
     - Input asset: `hdfs:///hadoop/demo/titanic-spark/test.csv`
     - Output asset: `hdfs:///hadoop/demo/titanic-spark/titanic_metrics_output.json`
 2. Wait for the job to enter the `COMPLETE` state
-3. Inside the Spark cluster, use `hadoop fs -getmerge -nl /hadoop/demo/titanic-spark/titanic_metrics_output.json /home/cloudera/titanic_metrics_output.csv` and `kubectl cp SPARK_CLUSTER_POD_NAME:/home/cloudera/titanic_metrics_output.json titanic_metrics_output.json` to copy the output asset to your local computer.
+3. Inside the Spark cluster, use `hadoop fs -getmerge -nl /hadoop/demo/titanic-spark/titanic_metrics_output.json /home/cloudera/titanic_metrics_output.json` and `kubectl cp SPARK_CLUSTER_POD_NAME:/home/cloudera/titanic_metrics_output.json titanic_metrics_output.json` to copy the output asset to your local computer.
     - After running `hadoop fs -getmerge ...`, you can run `cat titanic_metrics_output.json` in the Spark cluster and you should see the following printed to the terminal:
 
    ```json
-   {"accuracy": 0.7972027972027972}
+   {"accuracy":0.7972027972027972}
    ```
 
 ### Manual Tests
