@@ -18,10 +18,11 @@ from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 
 # modelop.init
 def init():
-    print("Begin function...")
+    print("Begin function...", flush=True)
 
     global SPARK
     SPARK = SparkSession.builder.appName("DriftTest").getOrCreate()
+    print("Spark variable:", SPARK, flush=True)
 
     global MODEL
     MODEL = RandomForestClassificationModel.load("/hadoop/demo/titanic-spark/titanic")
@@ -68,7 +69,7 @@ def metrics(external_inputs: List, external_outputs: List, external_model_assets
     accuracy = evaluator.evaluate(predictions)
 
     output_df = SPARK.createDataFrame([{"accuracy": accuracy}])
-    print("Metrics output:")
+    print("Metrics output:", flush=True)
     output_df.show()
 
     output_df.coalesce(1).write.mode("overwrite").option("header", "true").format(
